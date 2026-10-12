@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>"App Not Installed" on Android: What the Message Is Telling You</title>
+<meta name="description" content="Android's App not installed error has six different causes. Match the wording you see to the cause: package conflict, damaged APK, compatibility, source permission or storage.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://app-not-installed-causes.vercel.app/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="&quot;App Not Installed&quot; on Android: What the Message Is Telling You">
+<meta property="og:description" content="Six causes behind one error. Match the wording you see to the cause before you retry.">
+<meta property="og:url" content="https://app-not-installed-causes.vercel.app/">
+<meta property="og:image" content="https://app-not-installed-causes.vercel.app/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#2d3748; --head:#101827; --page:#f7fafc; --line:#dbe2ec; --soft:#eef3ff; --link:#3156d3; --sky:#60a5fa; --hero-text:#f7f9ff; --hero-muted:#dbe4f2; --ok:#17663a; --ok-bg:#e8f7ee; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--page); color:var(--ink); font:17px/1.7 Poppins,"Segoe UI",Helvetica,Arial,sans-serif; -webkit-font-smoothing:antialiased; }
+  img { max-width:100%; }
+  .wrap { max-width:1020px; margin:0 auto; padding:0 28px; }
+  .narrow { max-width:740px; }
+  .top { background:#fff; border-bottom:1px solid #e2e8f0; }
+  .top .wrap { padding-top:10px; padding-bottom:10px; display:flex; justify-content:center; }
+  .top img { display:block; height:68px; width:auto; }
+
+  .hero { color:var(--hero-text); padding:70px 0 78px; background:linear-gradient(135deg,#050508 0%,#0b0e0f 48%,#223178 100%); }
+  .hero .wrap { display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr); gap:52px; align-items:center; }
+  .pill { display:inline-block; margin:0 0 20px; padding:7px 14px; border:1px solid rgba(96,165,250,.45); border-radius:9999px; background:rgba(49,86,211,.18); color:var(--sky); font-size:12.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; }
+  h1 { margin:0 0 20px; font-size:48px; line-height:1.1; font-weight:800; letter-spacing:-.025em; }
+  h1 em { font-style:normal; color:var(--sky); }
+  .lede { margin:0; font-size:19px; line-height:1.65; color:var(--hero-muted); max-width:520px; }
+  .dialog { background:#fff; color:var(--head); border-radius:20px; padding:24px 24px 16px; box-shadow:0 30px 70px rgba(0,0,0,.5); transform:rotate(-1.2deg); }
+  .dialog .tag { display:inline-block; font-size:11.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:4px 10px; border-radius:6px; background:var(--sky); color:#06122e; }
+  .dialog h3 { margin:14px 0 6px; font-size:21px; font-weight:700; }
+  .dialog p { margin:0 0 16px; font-size:15.5px; color:#4a5568; }
+  .dialog .btns { display:flex; justify-content:flex-end; gap:22px; padding-top:12px; border-top:1px solid #edf1f6; font-weight:600; color:var(--link); font-size:15px; }
+
+  section { padding:66px 0 0; }
+  section:last-of-type { padding-bottom:84px; }
+  .eyebrow { margin:0 0 8px; font-size:13px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--link); }
+  h2 { margin:0 0 16px; font-size:33px; line-height:1.2; font-weight:700; color:var(--head); letter-spacing:-.02em; }
+  p { margin:0 0 18px; }
+  a { color:var(--link); font-weight:500; text-underline-offset:3px; }
+  figure { margin:28px 0 0; }
+  figure .scroll { overflow-x:auto; border-radius:16px; }
+  figure img { display:block; width:100%; min-width:760px; height:auto; }
+
+  .msgs { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin-top:26px; }
+  .msg { background:#fff; border:1px solid var(--line); border-radius:16px; padding:20px 22px; }
+  .msg q { display:block; quotes:none; font:600 15px/1.5 Consolas,ui-monospace,Menlo,monospace; color:#27408f; background:var(--soft); border-radius:10px; padding:10px 12px; margin-bottom:12px; }
+  .msg b { display:block; color:var(--head); font-size:17px; margin-bottom:2px; }
+  .msg span { font-size:15.5px; }
+
+  .steps { margin:22px 0 0; padding:0; list-style:none; counter-reset:s; display:grid; gap:10px; }
+  .steps li { counter-increment:s; position:relative; background:#fff; border:1px solid var(--line); border-radius:14px; padding:15px 20px 15px 62px; font-size:16px; }
+  .steps li::before { content:counter(s); position:absolute; left:18px; top:14px; width:30px; height:30px; border-radius:9999px; background:var(--head); color:#fff; font-weight:700; font-size:14px; display:grid; place-items:center; }
+
+  .keep { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:16px; margin-top:26px; }
+  .keep div { border-radius:16px; padding:24px 26px; background:#fff; border:1px solid var(--line); }
+  .keep div:first-child { background:var(--ok-bg); border-color:#bfe6cd; }
+  .keep h3 { margin:0 0 8px; font-size:19px; font-weight:700; color:var(--head); }
+  .keep div:first-child h3 { color:var(--ok); }
+  .keep p { margin:0; font-size:16px; }
+
+  @media (max-width:860px) {
+    .hero .wrap, .msgs, .keep { grid-template-columns:minmax(0,1fr); }
+    .hero { padding:50px 0 54px; } .hero .wrap { gap:32px; }
+    h1 { font-size:35px; } h2 { font-size:26px; }
+    .dialog { transform:none; max-width:420px; }
+    section { padding-top:52px; }
+  }
+  @media (max-width:520px) { .wrap { padding:0 18px; } .top img { height:54px; } h1 { font-size:30px; } }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a href="./"><img src="logo.png" width="69" height="68" alt="DeltaaExecutor.org logo"></a>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <div>
+      <p class="pill">Android install error</p>
+      <h1>"App not installed": <em>what the message is telling you</em></h1>
+      <p class="lede">The error means Android rejected the APK. The words shown beneath or beside it say why. Keep the message on screen and read it before you remove anything or change a setting.</p>
+    </div>
+    <div class="dialog" role="img" aria-label="Example Android dialog: App not installed, with the detail line Package conflicts with an existing package">
+      <span class="tag">Example</span>
+      <h3>App not installed</h3>
+      <p>Package conflicts with an existing package.</p>
+      <div class="btns"><span>Done</span></div>
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <section>
+    <div class="wrap">
+      <div class="narrow">
+        <p class="eyebrow">Match the wording</p>
+        <h2>Six messages, six causes</h2>
+        <p>Tapping Install again does not change the cause. Find the line that matches what your phone shows.</p>
+      </div>
+      <div class="msgs">
+        <div class="msg"><q>Package conflicts with an existing package</q><b>Signature conflict</b><span>An installed app has the same package name but a different signing certificate.</span></div>
+        <div class="msg"><q>Problem parsing the package / appears to be invalid</q><b>Damaged or incomplete file</b><span>The APK did not finish downloading, was altered, or is not a normal installable package.</span></div>
+        <div class="msg"><q>A compatibility message naming your phone</q><b>Version or architecture</b><span>The Android release or the processor architecture does not match the APK.</span></div>
+        <div class="msg"><q>Not allowed to install from this source</q><b>Source permission</b><span>The browser or file manager opening the APK has not been given permission.</span></div>
+        <div class="msg"><q>Insufficient storage</q><b>Not enough working space</b><span>Android needs more room than the file size to copy, unpack and stage the app.</span></div>
+        <div class="msg"><q>No detail; the installer freezes or closes</q><b>Stuck installer</b><span>Restart the phone, then retry the same verified file once.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="narrow">
+        <p class="eyebrow">The most common one</p>
+        <h2>Why a package conflict happens</h2>
+        <p>Android identifies an app by its package name and its signing certificate. An update can replace an installed app only when both match. If the name matches and the certificate does not, Android blocks the replacement.</p>
+      </div>
+      <figure>
+        <div class="scroll"><img src="package-identity.svg" width="1200" height="360" alt="Android compares package name and signing certificate: when both match the update installs, when the certificate differs it reports a package conflict"></div>
+      </figure>
+      <ol class="steps narrow">
+        <li>Open <b>Settings</b>, then <b>Apps</b>, and find the existing installation named in the error.</li>
+        <li>Confirm it is the conflicting package. Do not remove an unrelated app with a similar icon.</li>
+        <li>Save any local settings or files you need. Uninstalling can remove them.</li>
+        <li>Remove the confirmed installation, then install the current APK.</li>
+      </ol>
+      <p class="narrow" style="margin-top:22px">If the package installs and the app then will not open, closes, or rejects a key, the fault is in a different layer. For those, <a href="https://deltaexecutororg-symptom-first.static.hf.space/index.html">start from the symptom</a>.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="narrow">
+        <p class="eyebrow">Two things to leave alone</p>
+        <h2>What not to change</h2>
+      </div>
+      <div class="keep">
+        <div><h3>Keep Play Protect on</h3><p>A Play Protect warning is a security decision. "Package conflicts", "invalid package" and "not compatible" are installation conditions. They are separate, and switching protection off fixes none of them.</p></div>
+        <div><h3>Do not edit the APK</h3><p>Renaming the extension, unpacking the file or rebuilding it with an editor changes the package. That turns a damaged-file problem into a signing conflict. Delete the failed download and get a fresh copy.</p></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+</body>
+</html>
